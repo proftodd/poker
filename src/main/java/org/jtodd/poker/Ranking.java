@@ -1,7 +1,7 @@
 package org.jtodd.poker;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public enum Ranking {
     STRAIGHT_FLUSH,
@@ -37,29 +37,15 @@ public enum Ranking {
     }
 
     private static boolean isStraightFlush(Hand hand) {
-        Set<Card> theCards = hand.theCards();
-        List<Card> theSortedCards = new ArrayList<>(theCards);
-        Collections.sort(theSortedCards);
-        char theFirstCardsSuit = theSortedCards.get(0).suit;
-        boolean allCardsSameSuit = theCards.stream().allMatch(c -> c.suit == theFirstCardsSuit);
-        boolean inSequence = true;
-        for (int i = 1; i < 5; ++i) {
-            inSequence = inSequence && (theSortedCards.get(i - 1).numericValue + 1 == theSortedCards.get(i).numericValue);
-        }
-        return allCardsSameSuit && inSequence;
+        return isFlush(hand) && isStraight(hand);
     }
 
     private static boolean isFourOfAKind(Hand hand) {
-        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
-            c -> c.value
-        ));
-        return partitioned.values().stream().anyMatch(l -> l.size() == 4);
+        return hand.partitionByValue().values().stream().anyMatch(l -> l.size() == 4);
     }
 
     private static boolean isFullHouse(Hand hand) {
-        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
-                c -> c.value
-        ));
+        Map<Character, List<Card>> partitioned = hand.partitionByValue();
         return partitioned.values().stream().anyMatch(l -> l.size() == 3) &&
                partitioned.values().stream().anyMatch(l -> l.size() == 2);
     }
@@ -71,31 +57,21 @@ public enum Ranking {
 
     private static boolean isStraight(Hand hand) {
         List<Card> theSortedCards = hand.sortByValue();
-        boolean inSequence = true;
-        for (int i = 1; i < 5; ++i) {
-            inSequence = inSequence && (theSortedCards.get(i - 1).numericValue + 1 == theSortedCards.get(i).numericValue);
-        }
-        return inSequence;
+        int lowestCardValue = theSortedCards.get(0).numericValue;
+        return IntStream.range(0, theSortedCards.size()).allMatch(
+            i -> theSortedCards.get(i).numericValue - lowestCardValue == i
+        );
     }
 
     private static boolean isThreeOfAKind(Hand hand) {
-        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
-                c -> c.value
-        ));
-        return partitioned.values().stream().anyMatch(l -> l.size() == 3);
+        return hand.partitionByValue().values().stream().anyMatch(l -> l.size() == 3);
     }
 
     private static boolean isTwoPairs(Hand hand) {
-        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
-                c -> c.value
-        ));
-        return partitioned.values().stream().filter(l -> l.size() == 2).count() == 2;
+        return hand.partitionByValue().values().stream().filter(l -> l.size() == 2).count() == 2;
     }
 
     private static boolean isPair(Hand hand) {
-        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
-                c -> c.value
-        ));
-        return partitioned.values().stream().anyMatch(l -> l.size() == 2);
+        return hand.partitionByValue().values().stream().anyMatch(l -> l.size() == 2);
     }
 }

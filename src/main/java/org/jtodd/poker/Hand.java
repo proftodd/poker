@@ -3,6 +3,8 @@ package org.jtodd.poker;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Hand {
     private static final Pattern pattern = Pattern.compile("^([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS])$");
@@ -42,5 +44,11 @@ public class Hand {
         Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
         Arrays.sort(myCards, Comparator.comparingInt(c -> c.numericValue));
         return List.of(myCards);
+    }
+
+    public Map<Character, List<Card>> partitionByValue() {
+        return Stream.of(cards).collect(Collectors.groupingBy(
+            c -> c.value
+        ));
     }
 }
