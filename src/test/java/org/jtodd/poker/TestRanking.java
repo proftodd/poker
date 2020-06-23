@@ -39,4 +39,11 @@ public class TestRanking {
         Hand theHand = Hand.parseHand(handString).get();
         Assert.assertEquals(Ranking.FLUSH, Ranking.rank(theHand));
     }
+
+    @Test
+    public void itAssignsStraight() {
+        String handString = "TH AH QC KH JH";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.STRAIGHT, Ranking.rank(theHand));
+    }
 }

@@ -23,6 +23,8 @@ public enum Ranking {
             return FULL_HOUSE;
         } else if (isFlush(hand)) {
             return FLUSH;
+        } else if (isStraight(hand)) {
+            return STRAIGHT;
         } else {
             return HIGH_CARD;
         }
@@ -59,5 +61,14 @@ public enum Ranking {
     private static boolean isFlush(Hand hand) {
         char oneSuit = hand.theCards().iterator().next().suit;
         return hand.theCards().stream().allMatch(c -> c.suit == oneSuit);
+    }
+
+    private static boolean isStraight(Hand hand) {
+        List<Card> theSortedCards = hand.sortByValue();
+        boolean inSequence = true;
+        for (int i = 1; i < 5; ++i) {
+            inSequence = inSequence && (theSortedCards.get(i - 1).numericValue + 1 == theSortedCards.get(i).numericValue);
+        }
+        return inSequence;
     }
 }

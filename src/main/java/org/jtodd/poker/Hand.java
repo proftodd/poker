@@ -1,7 +1,6 @@
 package org.jtodd.poker;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,5 +30,17 @@ public class Hand {
 
     public Set<Card> theCards() {
         return Set.of(cards);
+    }
+
+    public List<Card> sortBySuit() {
+        Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
+        Arrays.sort(myCards, Comparator.comparingInt(c -> c.suit));
+        return List.of(myCards);
+    }
+
+    public List<Card> sortByValue() {
+        Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
+        Arrays.sort(myCards, Comparator.comparingInt(c -> c.numericValue));
+        return List.of(myCards);
     }
 }
