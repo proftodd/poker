@@ -25,6 +25,12 @@ public enum Ranking {
             return FLUSH;
         } else if (isStraight(hand)) {
             return STRAIGHT;
+        } else if (isThreeOfAKind(hand)) {
+            return THREE_OF_A_KIND;
+        } else if (isTwoPairs(hand)) {
+            return TWO_PAIRS;
+        } else if (isPair(hand)) {
+            return PAIR;
         } else {
             return HIGH_CARD;
         }
@@ -70,5 +76,26 @@ public enum Ranking {
             inSequence = inSequence && (theSortedCards.get(i - 1).numericValue + 1 == theSortedCards.get(i).numericValue);
         }
         return inSequence;
+    }
+
+    private static boolean isThreeOfAKind(Hand hand) {
+        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
+                c -> c.value
+        ));
+        return partitioned.values().stream().anyMatch(l -> l.size() == 3);
+    }
+
+    private static boolean isTwoPairs(Hand hand) {
+        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
+                c -> c.value
+        ));
+        return partitioned.values().stream().filter(l -> l.size() == 2).count() == 2;
+    }
+
+    private static boolean isPair(Hand hand) {
+        Map<Object, List<Card>> partitioned = hand.theCards().stream().collect(Collectors.groupingBy(
+                c -> c.value
+        ));
+        return partitioned.values().stream().anyMatch(l -> l.size() == 2);
     }
 }

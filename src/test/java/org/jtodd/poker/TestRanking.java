@@ -46,4 +46,32 @@ public class TestRanking {
         Hand theHand = Hand.parseHand(handString).get();
         Assert.assertEquals(Ranking.STRAIGHT, Ranking.rank(theHand));
     }
+
+    @Test
+    public void itAssignsThreeOfAKind() {
+        String handString = "QC QS 9H QH 2S";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.THREE_OF_A_KIND, Ranking.rank(theHand));
+    }
+
+    @Test
+    public void itAssignsTwoPairs() {
+        String handString = "QC QS 9H 2S 9D";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.TWO_PAIRS, Ranking.rank(theHand));
+    }
+
+    @Test
+    public void itAssignsPair() {
+        String handString = "QC QS 9H 2S 8D";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.PAIR, Ranking.rank(theHand));
+    }
+
+    @Test
+    public void itAssignsHighCard() {
+        String handString = "2C 3H 4S 8C AH";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.HIGH_CARD, Ranking.rank(theHand));
+    }
 }
