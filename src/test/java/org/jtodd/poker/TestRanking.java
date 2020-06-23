@@ -25,4 +25,18 @@ public class TestRanking {
         Hand theHand = Hand.parseHand(handString).get();
         Assert.assertEquals(Ranking.FOUR_OF_A_KIND, Ranking.rank(theHand));
     }
+
+    @Test
+    public void itAssignsFullHouse() {
+        String handString = "4D 4C 8H 8S 8C";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.FULL_HOUSE, Ranking.rank(theHand));
+    }
+
+    @Test
+    public void itAssignsFlush() {
+        String handString = "AH 4H 7H 9H 3H";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.FLUSH, Ranking.rank(theHand));
+    }
 }
