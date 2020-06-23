@@ -1,6 +1,7 @@
 package org.jtodd.poker;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestRanking {
@@ -8,15 +9,16 @@ public class TestRanking {
     @Test
     public void itAssignsStraightFlush() {
         String handString = "9H TH JH QH KH";
-        Hand theHand;
-
-        theHand = Hand.parseHand(handString).get();
+        Hand theHand = Hand.parseHand(handString).get();
         Assert.assertEquals(Ranking.STRAIGHT_FLUSH, Ranking.rank(theHand));
+    }
 
-        // TODO: Make sure aces can be high or low
-        // String handString2 = "AC 2C 3C 4C 5C";
-        // theHand = Hand.parseHand(handString2).get();
-        // Assert.assertEquals(Ranking.STRAIGHT_FLUSH, Ranking.rank(theHand));
+    @Ignore("low aces not implemented yet")
+    @Test
+    public void acesCanBeLowForStraightFlush() {
+         String handString = "AC 2C 3C 4C 5C";
+         Hand theHand = Hand.parseHand(handString).get();
+         Assert.assertEquals(Ranking.STRAIGHT_FLUSH, Ranking.rank(theHand));
     }
 
     @Test
@@ -43,6 +45,14 @@ public class TestRanking {
     @Test
     public void itAssignsStraight() {
         String handString = "TH AH QC KH JH";
+        Hand theHand = Hand.parseHand(handString).get();
+        Assert.assertEquals(Ranking.STRAIGHT, Ranking.rank(theHand));
+    }
+
+    @Ignore("low aces not implemented yet")
+    @Test
+    public void itAssignsStraightWithLowAce() {
+        String handString = "AD 2C 3S 4H 5D";
         Hand theHand = Hand.parseHand(handString).get();
         Assert.assertEquals(Ranking.STRAIGHT, Ranking.rank(theHand));
     }
