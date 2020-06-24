@@ -7,13 +7,7 @@ public class ThreeOfAKind implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof HighCard || o instanceof Pair || o instanceof TwoPairs) {
-            return -1;
-        } else if (o instanceof ThreeOfAKind) {
-            return 0;
-        } else {
-            return 1;
-        }
+    public int getValue() {
+        return 5;
     }
 }

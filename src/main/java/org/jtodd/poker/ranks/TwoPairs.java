@@ -7,13 +7,7 @@ public class TwoPairs implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof HighCard || o instanceof Pair) {
-            return -1;
-        } else if (o instanceof TwoPairs) {
-            return 0;
-        } else {
-            return 1;
-        }
+    public int getValue() {
+        return 6;
     }
 }

@@ -7,11 +7,7 @@ public class HighCard implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof HighCard) {
-            return 0;
-        } else {
-            return 1;
-        }
+    public int getValue() {
+        return 8;
     }
 }

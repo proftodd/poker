@@ -7,11 +7,7 @@ public class StraightFlush implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof StraightFlush) {
-            return 0;
-        } else {
-            return -1;
-        }
+    public int getValue() {
+        return 0;
     }
 }

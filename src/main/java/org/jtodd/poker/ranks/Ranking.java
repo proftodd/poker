@@ -8,6 +8,12 @@ import java.util.stream.IntStream;
 
 public interface Ranking extends Comparable<Ranking> {
 
+    int getValue();
+
+    default int compareTo(Ranking o) {
+        return Integer.compare(this.getValue(), o.getValue());
+    }
+
     static Ranking rank(Hand hand) {
         if (isStraightFlush(hand)) {
             return new StraightFlush(hand);

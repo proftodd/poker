@@ -7,13 +7,7 @@ public class Straight implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof StraightFlush || o instanceof FourOfAKind || o instanceof FullHouse || o instanceof Flush) {
-            return 1;
-        } else if (o instanceof Straight) {
-            return 0;
-        } else {
-            return -1;
-        }
+    public int getValue() {
+        return 4;
     }
 }

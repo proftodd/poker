@@ -7,13 +7,7 @@ public class FullHouse implements Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
-        if (o instanceof StraightFlush || o instanceof FourOfAKind) {
-            return 1;
-        } else if (o instanceof FullHouse) {
-            return 0;
-        } else {
-            return -1;
-        }
+    public int getValue() {
+        return 2;
     }
 }
