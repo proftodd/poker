@@ -140,6 +140,20 @@ public class TestRanking {
     }
 
     @Test
+    public void itBreaksTiesInFlush() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("AH 4H 7H 9H 3H").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("AC 4C 7C 9C 2C").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
+    public void itBreaksTiesInStraight() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("9H TH JC QH KH").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("2S 3S 4D 5S 6S").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
     public void itBreakTiesInThreeOfAKind() {
         Ranking r1 = Ranking.rank(Hand.parseHand("QC QS 9H QH 2S").get());
         Ranking r2 = Ranking.rank(Hand.parseHand("AC AD AH 2S KC").get());
