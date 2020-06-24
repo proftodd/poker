@@ -124,4 +124,11 @@ public class TestRanking {
         Ranking r2 = Ranking.rank(Hand.parseHand("2S 3S 4S 5S 6S").get());
         Assert.assertTrue(r1.compareTo(r2) < 0);
     }
+
+    @Test
+    public void itBreaksTiesInHighCard() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C AH").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C KH").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
 }

@@ -16,10 +16,10 @@ public class StraightFlush extends Ranking {
 
     @Override
     public int compareTo(Ranking o) {
-        if (o.getValue() == 0) {
-            Card myHighCard = this.getHand().theCards().stream().max(Card::compareTo).get();
-            Card otherHighCard = o.getHand().theCards().stream().max(Card::compareTo).get();
-            return myHighCard.compareTo(otherHighCard);
+        if (this.getValue() == o.getValue()) {
+            Card myHighCard = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
+            Card otherHighCard = o.getHand().sortByValue().get(o.getHand().theCards().size() - 1);
+            return Integer.compare(otherHighCard.numericValue, myHighCard.numericValue);
         } else {
             return -1;
         }
