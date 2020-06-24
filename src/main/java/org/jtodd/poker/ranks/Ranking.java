@@ -6,13 +6,21 @@ import org.jtodd.poker.Hand;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public interface Ranking extends Comparable<Ranking> {
+public abstract class Ranking implements Comparable<Ranking> {
 
-    int getValue();
+    private final Hand hand;
 
-    Hand getHand();
+    abstract int getValue();
 
-    default int compareTo(Ranking o) {
+    protected Ranking(Hand hand) {
+        this.hand = hand;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public int compareTo(Ranking o) {
         return Integer.compare(this.getValue(), o.getValue());
     }
 

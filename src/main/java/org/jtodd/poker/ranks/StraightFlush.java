@@ -3,11 +3,10 @@ package org.jtodd.poker.ranks;
 import org.jtodd.poker.Card;
 import org.jtodd.poker.Hand;
 
-public class StraightFlush implements Ranking {
-    private final Hand hand;
+public class StraightFlush extends Ranking {
 
     public StraightFlush(Hand hand) {
-        this.hand = hand;
+        super(hand);
     }
 
     @Override
@@ -16,14 +15,9 @@ public class StraightFlush implements Ranking {
     }
 
     @Override
-    public Hand getHand() {
-        return hand;
-    }
-
-    @Override
     public int compareTo(Ranking o) {
         if (o.getValue() == 0) {
-            Card myHighCard = hand.theCards().stream().max(Card::compareTo).get();
+            Card myHighCard = this.getHand().theCards().stream().max(Card::compareTo).get();
             Card otherHighCard = o.getHand().theCards().stream().max(Card::compareTo).get();
             return myHighCard.compareTo(otherHighCard);
         } else {

@@ -2,16 +2,10 @@ package org.jtodd.poker.ranks;
 
 import org.jtodd.poker.Hand;
 
-public class ThreeOfAKind implements Ranking {
-    private final Hand hand;
+public class ThreeOfAKind extends Ranking {
 
    public ThreeOfAKind(Hand hand) {
-       this.hand = hand;
-    }
-
-    @Override
-    public Hand getHand() {
-        return hand;
+       super(hand);
     }
 
     @Override
