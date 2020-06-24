@@ -161,6 +161,26 @@ public class TestRanking {
     }
 
     @Test
+    public void itBreaksTiesInTwoPairBasedOnHigherPair() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("KC KS 9H 2S 9D").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("QC QS 9H 2S 9D").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
+    public void itBreaksTiesInTwoPairBasedOnLowerPair() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("KC KS TH 2S TD").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("KC KS 9H 2S 9D").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
+    public void itBreaksTiesInTwoPairBasedOnSingleton() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("KC KS 9H 3S 9D").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("KC KS 9H 2S 9D").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+    @Test
     public void itBreaksTiesInHighCard() {
         Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 9D AH").get());
         Ranking r2 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C AS").get());
