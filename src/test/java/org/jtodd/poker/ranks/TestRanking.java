@@ -5,6 +5,11 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TestRanking {
 
     @Test
@@ -84,5 +89,32 @@ public class TestRanking {
         String handString = "2C 3H 4S 8C AH";
         Hand theHand = Hand.parseHand(handString).get();
         Assert.assertTrue(Ranking.rank(theHand) instanceof HighCard);
+    }
+
+    @Test
+    public void itRanksHandCorrectly() {
+        List<Hand> hands = new ArrayList<>();
+        hands.add(Hand.parseHand("2C 3H 4S 8C AH").get()); // high card
+        hands.add(Hand.parseHand("QC QS 9H 2S 8D").get()); // pair
+        hands.add(Hand.parseHand("QC QS 9H 2S 9D").get()); // two pairs
+        hands.add(Hand.parseHand("QC QS 9H QH 2S").get()); // three of a kind
+        hands.add(Hand.parseHand("TH AH QC KH JH").get()); // straight
+        hands.add(Hand.parseHand("AH 4H 7H 9H 3H").get()); // flush
+        hands.add(Hand.parseHand("4D 4C 8H 8S 8C").get()); // full house
+        hands.add(Hand.parseHand("2S 2D 2C 2H 5C").get()); // four of a kind
+        hands.add(Hand.parseHand("9H TH JH QH KH").get()); // straight flush
+        Collections.shuffle(hands);
+
+        List<Ranking> ranks = hands.stream().map(Ranking::rank).sorted().collect(Collectors.toList());
+
+        Assert.assertTrue(ranks.get(0) instanceof StraightFlush);
+        Assert.assertTrue(ranks.get(1) instanceof FourOfAKind);
+        Assert.assertTrue(ranks.get(2) instanceof FullHouse);
+        Assert.assertTrue(ranks.get(3) instanceof Flush);
+        Assert.assertTrue(ranks.get(4) instanceof Straight);
+        Assert.assertTrue(ranks.get(5) instanceof ThreeOfAKind);
+        Assert.assertTrue(ranks.get(6) instanceof TwoPairs);
+        Assert.assertTrue(ranks.get(7) instanceof Pair);
+        Assert.assertTrue(ranks.get(8) instanceof HighCard);
     }
 }

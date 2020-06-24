@@ -6,7 +6,7 @@ import org.jtodd.poker.Hand;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public interface Ranking {
+public interface Ranking extends Comparable<Ranking> {
 
     static Ranking rank(Hand hand) {
         if (isStraightFlush(hand)) {
