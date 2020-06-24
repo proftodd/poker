@@ -126,6 +126,20 @@ public class TestRanking {
     }
 
     @Test
+    public void itBreakTiesInFourOfAKind() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("2S 2D 2C 2H 5C").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("AC AD AH AS KC").get());
+        Assert.assertTrue(r1.compareTo(r2) > 0);
+    }
+
+    @Test
+    public void itBreakTiesInThreeOfAKind() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("QC QS 9H QH 2S").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("AC AD AH 2S KC").get());
+        Assert.assertTrue(r1.compareTo(r2) > 0);
+    }
+
+    @Test
     public void itBreaksTiesInHighCard() {
         Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 9D AH").get());
         Ranking r2 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C AS").get());
