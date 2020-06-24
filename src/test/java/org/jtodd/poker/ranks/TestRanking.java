@@ -180,6 +180,21 @@ public class TestRanking {
         Ranking r2 = Ranking.rank(Hand.parseHand("KC KS 9H 2S 9D").get());
         Assert.assertTrue(r1.compareTo(r2) < 0);
     }
+
+    @Test
+    public void itBreaksTiesInPairBasedOnPair() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("KC KS 9H 2S 8D").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("QC QS 9C 2D 8C").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
+    public void itBreaksTiesInPairBasedOnRest() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("QC QS 9H 2S 8D").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("QC QS 9C 2D 7C").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
     @Test
     public void itBreaksTiesInHighCard() {
         Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 9D AH").get());
