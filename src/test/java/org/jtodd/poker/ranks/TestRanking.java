@@ -127,8 +127,8 @@ public class TestRanking {
 
     @Test
     public void itBreaksTiesInHighCard() {
-        Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C AH").get());
-        Ranking r2 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C KH").get());
+        Ranking r1 = Ranking.rank(Hand.parseHand("2C 3H 4S 9D AH").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("2C 3H 4S 8C AS").get());
         Assert.assertTrue(r1.compareTo(r2) < 0);
     }
 }

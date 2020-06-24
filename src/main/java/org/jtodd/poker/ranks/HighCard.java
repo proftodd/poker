@@ -3,6 +3,8 @@ package org.jtodd.poker.ranks;
 import org.jtodd.poker.Card;
 import org.jtodd.poker.Hand;
 
+import java.util.List;
+
 public class HighCard extends Ranking {
 
     public HighCard(Hand hand) {
@@ -17,9 +19,16 @@ public class HighCard extends Ranking {
     @Override
     public int compareTo(Ranking o) {
         if (this.getValue() == o.getValue()) {
-            Card myHighCard = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
-            Card otherHighCard = o.getHand().sortByValue().get(o.getHand().theCards().size() - 1);
-            return Integer.compare(otherHighCard.numericValue, myHighCard.numericValue);
+            List<Card> meSortedByValue = this.getHand().sortByValue();
+            List<Card> otherSortedByValue = o.getHand().sortByValue();
+            for (int i = 0; i < meSortedByValue.size() && i < otherSortedByValue.size(); ++i) {
+                Card myCard = meSortedByValue.get(i);
+                Card otherCard = otherSortedByValue.get(i);
+                if (myCard.numericValue != otherCard.numericValue) {
+                    return Integer.compare(otherCard.numericValue, myCard.numericValue);
+                }
+            }
+            return 0;
         } else {
             return 1;
         }
