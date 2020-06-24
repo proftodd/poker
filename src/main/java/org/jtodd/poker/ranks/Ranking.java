@@ -1,38 +1,32 @@
-package org.jtodd.poker;
+package org.jtodd.poker.ranks;
+
+import org.jtodd.poker.Card;
+import org.jtodd.poker.Hand;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
-public enum Ranking {
-    STRAIGHT_FLUSH,
-    FOUR_OF_A_KIND,
-    FULL_HOUSE,
-    FLUSH,
-    STRAIGHT,
-    THREE_OF_A_KIND,
-    TWO_PAIRS,
-    PAIR,
-    HIGH_CARD;
+public interface Ranking {
 
-    public static Ranking rank(Hand hand) {
+    static Ranking rank(Hand hand) {
         if (isStraightFlush(hand)) {
-            return STRAIGHT_FLUSH;
+            return new StraightFlush(hand);
         } else if (isFourOfAKind(hand)) {
-            return FOUR_OF_A_KIND;
+            return new FourOfAKind(hand);
         } else if (isFullHouse(hand)) {
-            return FULL_HOUSE;
+            return new FullHouse(hand);
         } else if (isFlush(hand)) {
-            return FLUSH;
+            return new Flush(hand);
         } else if (isStraight(hand)) {
-            return STRAIGHT;
+            return new Straight(hand);
         } else if (isThreeOfAKind(hand)) {
-            return THREE_OF_A_KIND;
+            return new ThreeOfAKind(hand);
         } else if (isTwoPairs(hand)) {
-            return TWO_PAIRS;
+            return new TwoPairs(hand);
         } else if (isPair(hand)) {
-            return PAIR;
+            return new Pair(hand);
         } else {
-            return HIGH_CARD;
+            return new HighCard(hand);
         }
     }
 

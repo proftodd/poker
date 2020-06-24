@@ -1,8 +1,8 @@
 package org.jtodd.poker;
 
 public class Card implements Comparable<Card> {
-    final char suit;
-    final char value;
+    public final char suit;
+    public final char value;
     public final int numericValue;
 
     public Card(char value, char suit) {
