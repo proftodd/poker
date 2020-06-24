@@ -117,4 +117,11 @@ public class TestRanking {
         Assert.assertTrue(ranks.get(7) instanceof Pair);
         Assert.assertTrue(ranks.get(8) instanceof HighCard);
     }
+
+    @Test
+    public void itBreaksTiesInStraightFlush() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("9H TH JH QH KH").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("2S 3S 4S 5S 6S").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
 }

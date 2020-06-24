@@ -10,6 +10,8 @@ public interface Ranking extends Comparable<Ranking> {
 
     int getValue();
 
+    Hand getHand();
+
     default int compareTo(Ranking o) {
         return Integer.compare(this.getValue(), o.getValue());
     }

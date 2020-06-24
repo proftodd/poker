@@ -3,7 +3,15 @@ package org.jtodd.poker.ranks;
 import org.jtodd.poker.Hand;
 
 public class ThreeOfAKind implements Ranking {
-    public ThreeOfAKind(Hand hand) {
+    private final Hand hand;
+
+   public ThreeOfAKind(Hand hand) {
+       this.hand = hand;
+    }
+
+    @Override
+    public Hand getHand() {
+        return hand;
     }
 
     @Override
