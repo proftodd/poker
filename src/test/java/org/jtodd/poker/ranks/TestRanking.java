@@ -133,6 +133,13 @@ public class TestRanking {
     }
 
     @Test
+    public void itBreaksTiesInFullHouse() {
+        Ranking r1 = Ranking.rank(Hand.parseHand("4D 4C 8H 8S 8C").get());
+        Ranking r2 = Ranking.rank(Hand.parseHand("KC KH 6D 6H 6C").get());
+        Assert.assertTrue(r1.compareTo(r2) < 0);
+    }
+
+    @Test
     public void itBreakTiesInThreeOfAKind() {
         Ranking r1 = Ranking.rank(Hand.parseHand("QC QS 9H QH 2S").get());
         Ranking r2 = Ranking.rank(Hand.parseHand("AC AD AH 2S KC").get());
