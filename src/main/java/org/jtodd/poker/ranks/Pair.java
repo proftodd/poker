@@ -3,10 +3,7 @@ package org.jtodd.poker.ranks;
 import org.jtodd.poker.Card;
 import org.jtodd.poker.Hand;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Pair extends Ranking {
     Card thePair;
@@ -59,8 +56,8 @@ public class Pair extends Ranking {
             if (this.thePair.numericValue != p.thePair.numericValue) {
                 super.tieBreaker = this.thePair;
             } else {
-                super.tieBreaker = Hand.findFirstDifference(this.theRestSorted, p.theRestSorted)
-                        .orElse(null);
+                Hand.findFirstDifference(this.theRestSorted, p.theRestSorted)
+                        .ifPresent(integer -> super.tieBreaker = this.theRestSorted.get(integer));
             }
         }
     }

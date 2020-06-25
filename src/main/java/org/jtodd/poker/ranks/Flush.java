@@ -39,10 +39,8 @@ public class Flush extends Ranking {
         if (this.getValue() == o.getValue()) {
             List<Card> meSortedByValue = this.getHand().sortByValue();
             List<Card> otherSortedByValue = o.getHand().sortByValue();
-            super.tieBreaker = Hand.findFirstDifference(meSortedByValue, otherSortedByValue)
-                    .orElse(null);
-        } else {
-            super.tieBreaker = this.getHand().sortByValue().get(0);
+            Hand.findFirstDifference(meSortedByValue, otherSortedByValue)
+                    .ifPresent(integer -> super.tieBreaker = meSortedByValue.get(integer));
         }
     }
 
