@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Straight extends Ranking {
 
-    private final Card high;
-    private final Card low;
+    protected final Card high;
+    protected final Card low;
 
     public Straight(Hand hand) {
         super(hand);
