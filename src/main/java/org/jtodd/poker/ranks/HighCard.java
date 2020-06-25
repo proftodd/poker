@@ -11,7 +11,7 @@ public class HighCard extends Ranking {
     public HighCard(Hand hand) {
         super(hand);
         sortedByValue = hand.sortByValue();
-        super.tieBreaker = sortedByValue.get(sortedByValue.size() - 1);
+        super.tieBreaker = sortedByValue.get(0);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class HighCard extends Ranking {
     public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             HighCard ohc = (HighCard) o;
-            for (int i = this.sortedByValue.size() - 1; i >= 0; --i) {
+            for (int i = 0; i < this.sortedByValue.size() && i < ohc.sortedByValue.size(); ++i) {
                 Card myCard = this.sortedByValue.get(i);
                 Card otherCard = ohc.sortedByValue.get(i);
                 if (myCard.numericValue != otherCard.numericValue) {
@@ -40,7 +40,7 @@ public class HighCard extends Ranking {
     public void setTiebreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             HighCard ohc = (HighCard) o;
-            for (int i = this.sortedByValue.size() - 1; i >= 0; --i) {
+            for (int i = 0; i < this.sortedByValue.size() && i < ohc.sortedByValue.size(); ++i) {
                 Card myCard = this.sortedByValue.get(i);
                 Card otherCard = ohc.sortedByValue.get(i);
                 if (myCard.numericValue != otherCard.numericValue) {

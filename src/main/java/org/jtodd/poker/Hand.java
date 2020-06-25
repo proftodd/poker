@@ -42,7 +42,7 @@ public class Hand {
 
     public List<Card> sortByValue() {
         Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
-        Arrays.sort(myCards, Comparator.comparingInt(c -> c.numericValue));
+        Arrays.sort(myCards, (c1, c2) -> Integer.compare(c2.numericValue, c1.numericValue));
         return List.of(myCards);
     }
 

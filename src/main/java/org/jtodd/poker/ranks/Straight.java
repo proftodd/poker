@@ -17,8 +17,8 @@ public class Straight extends Ranking {
     @Override
     public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
-            Card myHighCard = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
-            Card otherHighCard = o.getHand().sortByValue().get(o.getHand().theCards().size() - 1);
+            Card myHighCard = this.getHand().sortByValue().get(0);
+            Card otherHighCard = o.getHand().sortByValue().get(0);
             return Integer.compare(otherHighCard.numericValue, myHighCard.numericValue);
         } else {
             return this.compareTo(o);
@@ -27,7 +27,7 @@ public class Straight extends Ranking {
 
     @Override
     public void setTiebreaker(Ranking o) {
-        super.tieBreaker = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
+        super.tieBreaker = this.getHand().sortByValue().get(0);
     }
 
     @Override

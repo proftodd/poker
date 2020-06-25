@@ -53,11 +53,11 @@ public class TestHand {
         String handString = "AH 2C 4S 3H 4C";
         Hand theHand = Hand.parseHand(handString).get();
         List<Card> sortedByValue = theHand.sortByValue();
-        Assert.assertEquals(new Card('2', 'C'), sortedByValue.get(0));
-        Assert.assertEquals(new Card('3', 'H'), sortedByValue.get(1));
-        List<Card> fours = sortedByValue.subList(2, 4);
+        Assert.assertEquals(new Card('A', 'H'), sortedByValue.get(0));
+        List<Card> fours = sortedByValue.subList(1, 3);
         Assert.assertTrue(fours.contains(new Card('4', 'C')));
         Assert.assertTrue(fours.contains(new Card('4', 'S')));
-        Assert.assertEquals(new Card('A', 'H'), sortedByValue.get(4));
+        Assert.assertEquals(new Card('3', 'H'), sortedByValue.get(3));
+        Assert.assertEquals(new Card('2', 'C'), sortedByValue.get(4));
     }
 }
