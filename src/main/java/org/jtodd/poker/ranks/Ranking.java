@@ -10,7 +10,7 @@ public abstract class Ranking implements Comparable<Ranking> {
 
     private final Hand hand;
 
-    abstract int getValue();
+    public abstract int getValue();
 
     protected Ranking(Hand hand) {
         this.hand = hand;

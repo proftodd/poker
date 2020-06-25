@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class TestGame {
 
-    @Ignore("WIP only sorts on ranks, does not yet break ties")
     @Test
     public void itGeneratesCorrectResult01() {
         String gameString = "Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH";
@@ -29,7 +28,6 @@ public class TestGame {
         Assert.assertEquals("Black wins. - with high card: 9", theGame.toString());
     }
 
-    @Ignore("implement reporting on tied hands")
     @Test
     public void itGeneratesCorrectResult04() {
         String gameString = "Black: 2H 3D 5S 9C KD  White: 2D 3H 5C 9S KH";

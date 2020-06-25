@@ -12,10 +12,6 @@ public class Player {
         this.ranking = ranking;
     }
 
-    public Ranking getRanking() {
-        return ranking;
-    }
-
     @Override
     public String toString() {
         return String.format("%s wins. - with %s", this.name, this.ranking);

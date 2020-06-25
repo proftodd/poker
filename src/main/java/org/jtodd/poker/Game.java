@@ -2,10 +2,8 @@ package org.jtodd.poker;
 
 import org.jtodd.poker.ranks.Ranking;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -31,6 +29,31 @@ public class Game {
 
     @Override
     public String toString() {
-        return players.get(0).toString();
+        Optional<Player> winner = getWinner();
+        if (winner.isPresent()) {
+            return winner.get().toString();
+        } else {
+            return "Tie.";
+        }
+    }
+
+    private Optional<Player> getWinner() {
+        List<Player> firstPlace = players
+                .stream()
+                .collect(Collectors.groupingBy(p -> p.ranking.getValue()))
+                .entrySet().stream()
+                .min((e1, e2) -> e1.getKey().compareTo(e2.getKey()))
+                .get()
+                .getValue();
+        if (firstPlace.size() == 1) {
+            return Optional.of(firstPlace.get(0));
+        } else {
+            Collections.sort(firstPlace, (f1, f2) -> f1.ranking.tieBreaker(f2.ranking));
+            if (firstPlace.get(0).ranking.tieBreaker(firstPlace.get(1).ranking) == 0) {
+                return Optional.empty();
+            } else {
+                return Optional.of(firstPlace.get(0));
+            }
+        }
     }
 }
