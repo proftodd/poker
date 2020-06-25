@@ -2,7 +2,7 @@ package org.jtodd.poker;
 
 import java.util.Map;
 
-public class Card implements Comparable<Card> {
+public class Card {
     private static final Map<Character, String> charToString = Map.of(
         'C', "Clubs",
         'D', "Diamonds",
@@ -66,14 +66,5 @@ public class Card implements Comparable<Card> {
     @Override
     public int hashCode() {
         return suit * value;
-    }
-
-    @Override
-    public int compareTo(Card o) {
-        if (this.suit == o.suit) {
-            return Integer.compare(this.numericValue, o.numericValue);
-        } else {
-            return Character.compare(this.suit, o.suit);
-        }
     }
 }
