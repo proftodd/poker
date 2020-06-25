@@ -10,6 +10,6 @@ public class TestHighCard {
     public void itBreaksTiesInHighCard() {
         HighCard r1 = new HighCard(Hand.parseHand("2C 3H 4S 9D AH").get());
         HighCard r2 = new HighCard(Hand.parseHand("2C 3H 4S 8C AS").get());
-        Assert.assertTrue(r1.compareTo(r2) < 0);
+        Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
 }

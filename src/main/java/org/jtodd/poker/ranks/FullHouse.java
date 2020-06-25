@@ -25,12 +25,12 @@ public class FullHouse extends Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
+    public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             FullHouse ofh = (FullHouse) o;
             return Integer.compare(ofh.theTrio.numericValue, this.theTrio.numericValue);
         } else {
-            return Integer.compare(this.getValue(), o.getValue());
+            return this.compareTo(o);
         }
     }
 

@@ -10,6 +10,6 @@ public class TestThreeOfAKind {
     public void itBreakTiesInThreeOfAKind() {
         ThreeOfAKind r1 = new ThreeOfAKind(Hand.parseHand("QC QS 9H QH 2S").get());
         ThreeOfAKind r2 = new ThreeOfAKind(Hand.parseHand("AC AD AH 2S KC").get());
-        Assert.assertTrue(r1.compareTo(r2) > 0);
+        Assert.assertTrue(r1.tieBreaker(r2) > 0);
     }
 }

@@ -10,20 +10,20 @@ public class TestTwoPairs {
     public void itBreaksTiesInTwoPairBasedOnHigherPair() {
         TwoPairs r1 = new TwoPairs(Hand.parseHand("KC KS 9H 2S 9D").get());
         TwoPairs r2 = new TwoPairs(Hand.parseHand("QC QS 9H 2S 9D").get());
-        Assert.assertTrue(r1.compareTo(r2) < 0);
+        Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
 
     @Test
     public void itBreaksTiesInTwoPairBasedOnLowerPair() {
         TwoPairs r1 = new TwoPairs(Hand.parseHand("KC KS TH 2S TD").get());
         TwoPairs r2 = new TwoPairs(Hand.parseHand("KC KS 9H 2S 9D").get());
-        Assert.assertTrue(r1.compareTo(r2) < 0);
+        Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
 
     @Test
     public void itBreaksTiesInTwoPairBasedOnSingleton() {
         TwoPairs r1 = new TwoPairs(Hand.parseHand("KC KS 9H 3S 9D").get());
         TwoPairs r2 = new TwoPairs(Hand.parseHand("KC KS 9H 2S 9D").get());
-        Assert.assertTrue(r1.compareTo(r2) < 0);
+        Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
 }

@@ -17,7 +17,7 @@ public class Flush extends Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
+    public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             List<Card> meSortedByValue = this.getHand().sortByValue();
             List<Card> otherSortedByValue = o.getHand().sortByValue();
@@ -30,7 +30,7 @@ public class Flush extends Ranking {
             }
             return 0;
         } else {
-            return Integer.compare(this.getValue(), o.getValue());
+            return this.compareTo(o);
         }
     }
 

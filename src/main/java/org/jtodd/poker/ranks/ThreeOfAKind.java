@@ -25,12 +25,12 @@ public class ThreeOfAKind extends Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
+    public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             ThreeOfAKind tfk = (ThreeOfAKind) o;
             return Integer.compare(tfk.theTrio.numericValue, this.theTrio.numericValue);
         } else {
-            return Integer.compare(this.getValue(), o.getValue());
+            return this.compareTo(o);
         }
     }
 

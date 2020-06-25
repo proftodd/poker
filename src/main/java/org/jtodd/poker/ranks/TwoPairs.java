@@ -43,7 +43,7 @@ public class TwoPairs extends Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
+    public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             TwoPairs otp = (TwoPairs) o;
             if (this.theHighPair.numericValue != otp.theHighPair.numericValue) {
@@ -54,7 +54,7 @@ public class TwoPairs extends Ranking {
                 return Integer.compare(otp.theOtherOne.numericValue, this.theOtherOne.numericValue);
             }
         } else {
-            return Integer.compare(this.getValue(), o.getValue());
+            return this.compareTo(o);
         }
     }
 

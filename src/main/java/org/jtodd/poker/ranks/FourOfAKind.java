@@ -26,12 +26,12 @@ public class FourOfAKind extends Ranking {
     }
 
     @Override
-    public int compareTo(Ranking o) {
+    public int tieBreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             FourOfAKind ofk = (FourOfAKind) o;
             return Integer.compare(ofk.theQuad.numericValue, this.theQuad.numericValue);
         } else {
-            return Integer.compare(this.getValue(), o.getValue());
+            return this.compareTo(o);
         }
     }
 

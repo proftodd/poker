@@ -24,6 +24,8 @@ public abstract class Ranking implements Comparable<Ranking> {
         return Integer.compare(this.getValue(), o.getValue());
     }
 
+    public abstract int tieBreaker(Ranking o);
+
     public static Ranking rank(Hand hand) {
         if (isStraightFlush(hand)) {
             return new StraightFlush(hand);
