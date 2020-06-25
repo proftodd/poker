@@ -4,8 +4,8 @@ import org.jtodd.poker.ranks.Ranking;
 
 public class Player {
 
-    private final String name;
-    private final Ranking ranking;
+    public final String name;
+    public final Ranking ranking;
 
     public Player(String name, Ranking ranking) {
         this.name = name;
