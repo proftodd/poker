@@ -1,7 +1,6 @@
 package org.jtodd.poker;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestGame {
@@ -20,12 +19,11 @@ public class TestGame {
         Assert.assertEquals("Black wins. - with Full House", theGame.toString());
     }
 
-    @Ignore("implement reporting on high card tiebreaker")
     @Test
     public void itGeneratesCorrectResult03() {
         String gameString = "Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C KH";
         Game theGame = Game.fromString(gameString);
-        Assert.assertEquals("Black wins. - with high card: 9", theGame.toString());
+        Assert.assertEquals("Black wins. - with High Card: 9", theGame.toString());
     }
 
     @Test

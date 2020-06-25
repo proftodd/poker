@@ -21,7 +21,7 @@ public class Flush extends Ranking {
         if (this.getValue() == o.getValue()) {
             List<Card> meSortedByValue = this.getHand().sortByValue();
             List<Card> otherSortedByValue = o.getHand().sortByValue();
-            for (int i = 0; i < meSortedByValue.size() && i < otherSortedByValue.size(); ++i) {
+            for (int i = meSortedByValue.size() - 1; i >= 0; --i) {
                 Card myCard = meSortedByValue.get(i);
                 Card otherCard = otherSortedByValue.get(i);
                 if (myCard.numericValue != otherCard.numericValue) {
@@ -31,6 +31,23 @@ public class Flush extends Ranking {
             return 0;
         } else {
             return this.compareTo(o);
+        }
+    }
+
+    @Override
+    public void setTiebreaker(Ranking o) {
+        if (this.getValue() == o.getValue()) {
+            List<Card> meSortedByValue = this.getHand().sortByValue();
+            List<Card> otherSortedByValue = o.getHand().sortByValue();
+            for (int i = meSortedByValue.size() - 1; i >= 0; --i) {
+                Card myCard = meSortedByValue.get(i);
+                Card otherCard = otherSortedByValue.get(i);
+                if (myCard.numericValue != otherCard.numericValue) {
+                    super.tieBreaker = myCard;
+                }
+            }
+        } else {
+            super.tieBreaker = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
         }
     }
 

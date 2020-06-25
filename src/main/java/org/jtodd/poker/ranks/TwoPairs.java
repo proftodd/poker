@@ -59,6 +59,20 @@ public class TwoPairs extends Ranking {
     }
 
     @Override
+    public void setTiebreaker(Ranking o) {
+        if (this.getValue() == o.getValue()) {
+            TwoPairs otp = (TwoPairs) o;
+            if (this.theHighPair.numericValue != otp.theHighPair.numericValue) {
+                super.tieBreaker = this.theHighPair;
+            } else if (this.theLowPair.numericValue != otp.theLowPair.numericValue) {
+                super.tieBreaker = this.theLowPair;
+            } else {
+                super.tieBreaker = this.theOtherOne;
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return "Two Pairs";
     }

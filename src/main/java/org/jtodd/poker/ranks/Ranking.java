@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public abstract class Ranking implements Comparable<Ranking> {
 
     private final Hand hand;
+    protected Card tieBreaker = null;
 
     public abstract int getValue();
 
@@ -25,6 +26,8 @@ public abstract class Ranking implements Comparable<Ranking> {
     }
 
     public abstract int tieBreaker(Ranking o);
+
+    public abstract void setTiebreaker(Ranking o);
 
     public static Ranking rank(Hand hand) {
         if (isStraightFlush(hand)) {

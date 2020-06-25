@@ -35,6 +35,11 @@ public class FullHouse extends Ranking {
     }
 
     @Override
+    public void setTiebreaker(Ranking o) {
+        super.tieBreaker = theTrio;
+    }
+
+    @Override
     public String toString() {
         return "Full House";
     }

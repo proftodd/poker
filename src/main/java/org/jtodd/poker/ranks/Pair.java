@@ -38,7 +38,7 @@ public class Pair extends Ranking {
             if (this.thePair.numericValue != op.thePair.numericValue) {
                 return Integer.compare(op.thePair.numericValue, this.thePair.numericValue);
             } else {
-                for (int i = 0; i < this.theRestSorted.size() && i < op.theRestSorted.size(); ++i) {
+                for (int i = this.theRestSorted.size() - 1; i >= 0; --i) {
                     Card myCard = this.theRestSorted.get(i);
                     Card otherCard = op.theRestSorted.get(i);
                     if (myCard.numericValue != otherCard.numericValue) {
@@ -49,6 +49,24 @@ public class Pair extends Ranking {
             }
         } else {
             return this.compareTo(o);
+        }
+    }
+
+    @Override
+    public void setTiebreaker(Ranking o) {
+        if (this.getValue() == o.getValue()) {
+            Pair p = (Pair) o;
+            if (this.thePair.numericValue != p.thePair.numericValue) {
+                super.tieBreaker = this.thePair;
+            } else {
+                for (int i = this.theRestSorted.size() - 1; i >= 0; --i) {
+                    Card myCard = this.theRestSorted.get(i);
+                    Card otherCard = p.theRestSorted.get(i);
+                    if (myCard.numericValue != otherCard.numericValue) {
+                        super.tieBreaker = myCard;
+                    }
+                }
+            }
         }
     }
 

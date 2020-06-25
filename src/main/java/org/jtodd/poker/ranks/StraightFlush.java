@@ -26,6 +26,11 @@ public class StraightFlush extends Ranking {
     }
 
     @Override
+    public void setTiebreaker(Ranking o) {
+        super.tieBreaker = this.getHand().sortByValue().get(this.getHand().theCards().size() - 1);
+    }
+
+    @Override
     public String toString() {
         return "Straight Flush";
     }

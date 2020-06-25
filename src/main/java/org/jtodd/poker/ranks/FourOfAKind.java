@@ -36,6 +36,11 @@ public class FourOfAKind extends Ranking {
     }
 
     @Override
+    public void setTiebreaker(Ranking o) {
+        super.tieBreaker = theQuad;
+    }
+
+    @Override
     public String toString() {
         return "Four of a Kind";
     }

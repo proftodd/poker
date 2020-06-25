@@ -51,6 +51,7 @@ public class Game {
             if (firstPlace.get(0).ranking.tieBreaker(firstPlace.get(1).ranking) == 0) {
                 return Optional.empty();
             } else {
+                firstPlace.get(0).ranking.setTiebreaker(firstPlace.get(1).ranking);
                 return Optional.of(firstPlace.get(0));
             }
         }
