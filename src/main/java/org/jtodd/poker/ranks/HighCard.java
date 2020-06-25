@@ -35,6 +35,8 @@ public class HighCard extends Ranking {
         }
     }
 
+    // TODO: This does not match the spec. Should return the tiebreaking card when
+    // comparing two High Cards. Not sure how to implement that with my current design.
     @Override
     public String toString() {
         return "High Card: " + this.sortedByValue.get(this.sortedByValue.size() - 1);
