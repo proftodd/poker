@@ -13,22 +13,13 @@ public class FullHouse extends Ranking {
     public FullHouse(Hand hand) {
         super(hand);
         Map<Character, List<Card>> grouped = hand.partitionByValue();
-        theTrio = grouped
-                .entrySet()
-                .stream()
-                .filter(e -> e.getValue().size() == 3)
-                .findFirst()
-                .get()
-                .getValue()
-                .get(0);
-        thePair = grouped
-                .entrySet()
-                .stream()
-                .filter(e -> e.getValue().size() == 2)
-                .findFirst()
-                .get()
-                .getValue()
-                .get(0);
+        for (List<Card> group : hand.partitionByValue().values()) {
+            if (group.size() == 3) {
+                theTrio = group.get(0);
+            } else if (group.size() == 2) {
+                thePair = group.get(0);
+            }
+        }
     }
 
     @Override
