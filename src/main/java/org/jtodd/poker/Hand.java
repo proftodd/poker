@@ -5,26 +5,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Hand {
-    private static final Pattern pattern = Pattern.compile("^([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS]) ([2-9TJQKA])([CDHS])$");
-    private final Card [] cards;
+    private static final Pattern pattern = Pattern.compile("([2-9TJQKA])([CDHS])");
+    private final Set<Card> cards;
 
-    private Hand(Card [] cards) {
+    private Hand(Set<Card> cards) {
         this.cards = cards;
     }
 
     public static Optional<Hand> parseHand(String hand) {
         Matcher matcher = pattern.matcher(hand);
-        if (matcher.matches()) {
-            Hand theHand = new Hand(new Card [] {
-                new Card(matcher.group(1).charAt(0), matcher.group(2).charAt(0)),
-                new Card(matcher.group(3).charAt(0), matcher.group(4).charAt(0)),
-                new Card(matcher.group(5).charAt(0), matcher.group(6).charAt(0)),
-                new Card(matcher.group(7).charAt(0), matcher.group(8).charAt(0)),
-                new Card(matcher.group(9).charAt(0), matcher.group(10).charAt(0))
-            });
+        Set<Card> theCards = new HashSet<>();
+        while (matcher.find()) {
+            theCards.add(new Card(matcher.group(1).charAt(0), matcher.group(2).charAt(0)));
+        }
+        if (theCards.size() > 0) {
+            Hand theHand = new Hand(theCards);
             return Optional.of(theHand);
         } else {
             return Optional.empty();
@@ -32,23 +29,23 @@ public class Hand {
     }
 
     public Set<Card> theCards() {
-        return Set.of(cards);
+        return Set.copyOf(cards);
     }
 
     public List<Card> sortBySuit() {
-        Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
-        Arrays.sort(myCards, Comparator.comparingInt(c -> c.suit));
-        return List.of(myCards);
+        List<Card> myCards = new ArrayList<>(this.theCards());
+        myCards.sort(Comparator.comparingInt(c -> c.suit));
+        return myCards;
     }
 
     public List<Card> sortByValue() {
-        Card [] myCards = Arrays.copyOfRange(cards, 0, cards.length);
-        Arrays.sort(myCards, (c1, c2) -> Integer.compare(c2.numericValue, c1.numericValue));
-        return List.of(myCards);
+        List<Card> myCards = new ArrayList<>(this.theCards());
+        myCards.sort((c1, c2) -> Integer.compare(c2.numericValue, c1.numericValue));
+        return myCards;
     }
 
     public Map<Character, List<Card>> partitionByValue() {
-        return Stream.of(cards).collect(Collectors.groupingBy(
+        return cards.stream().collect(Collectors.groupingBy(
             c -> c.value
         ));
     }
