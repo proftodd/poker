@@ -25,7 +25,17 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return String.format("%c%c", value, suit);
+        if (numericValue == 11) {
+            return "Jack";
+        } else if (numericValue == 12) {
+            return "Queen";
+        } else if (numericValue == 13) {
+            return "King";
+        } else if (numericValue == 14) {
+            return "Ace";
+        } else {
+            return Integer.toString(numericValue);
+        }
     }
 
     @Override
