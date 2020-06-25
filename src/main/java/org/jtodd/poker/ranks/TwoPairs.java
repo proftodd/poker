@@ -74,6 +74,6 @@ public class TwoPairs extends Ranking {
 
     @Override
     public String toString() {
-        return "Two Pairs";
+        return String.format("Two Pairs: %ss and %ss", theHighPair.toString(), theLowPair.toString());
     }
 }

@@ -19,4 +19,10 @@ public class TestPair {
         Pair r2 = new Pair(Hand.parseHand("QC QS 9C 2D 7C").get());
         Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
+
+    @Test
+    public void itGeneratesCorrectString() {
+        Ranking r = new Pair(Hand.parseHand("KC KS 9H 2S 8D").get());
+        Assert.assertEquals("Pair: of Kings", r.toString());
+    }
 }

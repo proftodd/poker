@@ -1,6 +1,15 @@
 package org.jtodd.poker;
 
+import java.util.Map;
+
 public class Card implements Comparable<Card> {
+    private static final Map<Character, String> charToString = Map.of(
+        'C', "Clubs",
+        'D', "Diamonds",
+        'H', "Hearts",
+        'S', "Spades"
+    );
+
     public final char suit;
     public final char value;
     public final int numericValue;
@@ -21,6 +30,10 @@ public class Card implements Comparable<Card> {
         } else {
             numericValue = value - '0';
         }
+    }
+
+    public String suitString() {
+        return charToString.get(this.suit);
     }
 
     @Override

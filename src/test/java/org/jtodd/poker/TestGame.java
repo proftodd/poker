@@ -16,7 +16,7 @@ public class TestGame {
     public void itGeneratesCorrectResult02() {
         String gameString = "Black: 2H 4S 4C 2D 4H  White: 2S 8S AS QS 3S";
         Game theGame = Game.fromString(gameString);
-        Assert.assertEquals("Black wins. - with Full House", theGame.toString());
+        Assert.assertEquals("Black wins. - with Full House: 4 over 2", theGame.toString());
     }
 
     @Test

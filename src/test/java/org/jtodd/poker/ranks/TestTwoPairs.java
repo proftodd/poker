@@ -26,4 +26,10 @@ public class TestTwoPairs {
         TwoPairs r2 = new TwoPairs(Hand.parseHand("KC KS 9H 2S 9D").get());
         Assert.assertTrue(r1.tieBreaker(r2) < 0);
     }
+
+    @Test
+    public void itGeneratesCorrectString() {
+        Ranking r = new TwoPairs(Hand.parseHand("KC KS 9H 2S 9D").get());
+        Assert.assertEquals("Two Pairs: Kings and 9s", r.toString());
+    }
 }

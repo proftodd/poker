@@ -12,7 +12,7 @@ public class TestPlayer {
     public void itGeneratesCorrectWinnerString() {
         Ranking ranking = new StraightFlush(Hand.parseHand("9H TH JH QH KH").get());
         Player player = new Player("White", ranking);
-        Assert.assertEquals("White wins. - with Straight Flush", player.toString());
+        Assert.assertEquals("White wins. - with Straight Flush: King to 9 of Hearts", player.toString());
     }
 
     @Test

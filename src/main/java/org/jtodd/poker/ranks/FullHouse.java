@@ -3,16 +3,28 @@ package org.jtodd.poker.ranks;
 import org.jtodd.poker.Card;
 import org.jtodd.poker.Hand;
 
+import java.util.List;
+import java.util.Map;
+
 public class FullHouse extends Ranking {
     Card theTrio;
+    Card thePair;
 
     public FullHouse(Hand hand) {
         super(hand);
-        theTrio = hand
-                .partitionByValue()
+        Map<Character, List<Card>> grouped = hand.partitionByValue();
+        theTrio = grouped
                 .entrySet()
                 .stream()
                 .filter(e -> e.getValue().size() == 3)
+                .findFirst()
+                .get()
+                .getValue()
+                .get(0);
+        thePair = grouped
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue().size() == 2)
                 .findFirst()
                 .get()
                 .getValue()
@@ -41,6 +53,6 @@ public class FullHouse extends Ranking {
 
     @Override
     public String toString() {
-        return "Full House";
+        return String.format("Full House: %s over %s", theTrio, thePair);
     }
 }

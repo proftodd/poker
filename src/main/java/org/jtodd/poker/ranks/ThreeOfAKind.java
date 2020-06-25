@@ -41,6 +41,6 @@ public class ThreeOfAKind extends Ranking {
 
     @Override
     public String toString() {
-        return "Three of a Kind";
+        return String.format("Three of a Kind: %ss", theTrio.toString());
     }
 }

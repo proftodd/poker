@@ -57,6 +57,6 @@ public class Pair extends Ranking {
 
     @Override
     public String toString() {
-        return "Pair";
+        return String.format("Pair: of %ss", thePair.toString());
     }
 }

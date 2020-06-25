@@ -32,7 +32,7 @@ public class AppTest {
     public void testApp() throws Exception {
         String path = AppTest.class.getResource("/sample_input.txt").toURI().getRawPath();
         String expected = "White wins. - with High Card: Ace\n" +
-                "Black wins. - with Full House\n" +
+                "Black wins. - with Full House: 4 over 2\n" +
                 "Black wins. - with High Card: 9\n" +
                 "Tie.\n";
 

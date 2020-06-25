@@ -42,6 +42,6 @@ public class FourOfAKind extends Ranking {
 
     @Override
     public String toString() {
-        return "Four of a Kind";
+        return String.format("Four of a Kind: %s", theQuad.toString());
     }
 }
