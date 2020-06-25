@@ -3,12 +3,41 @@
  */
 package org.jtodd.poker;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+
+    ByteArrayOutputStream testStream;
+    PrintStream originalOut;
+
+    @Before
+    public void setUp() {
+        testStream = new ByteArrayOutputStream();
+        originalOut = System.out;
+        System.setOut(new PrintStream(testStream));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    public void testApp() throws Exception {
+        String path = AppTest.class.getResource("/sample_input.txt").toURI().getRawPath();
+        String expected = "White wins. - with High Card: Ace\n" +
+                "Black wins. - with Full House\n" +
+                "Black wins. - with High Card: 9\n" +
+                "Tie.\n";
+
+        App.main(new String [] {path});
+
+        Assert.assertEquals(expected, testStream.toString());
     }
 }
