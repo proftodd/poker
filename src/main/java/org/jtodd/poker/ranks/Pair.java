@@ -59,13 +59,8 @@ public class Pair extends Ranking {
             if (this.thePair.numericValue != p.thePair.numericValue) {
                 super.tieBreaker = this.thePair;
             } else {
-                for (int i = this.theRestSorted.size() - 1; i >= 0; --i) {
-                    Card myCard = this.theRestSorted.get(i);
-                    Card otherCard = p.theRestSorted.get(i);
-                    if (myCard.numericValue != otherCard.numericValue) {
-                        super.tieBreaker = myCard;
-                    }
-                }
+                super.tieBreaker = Hand.findFirstDifference(this.theRestSorted, p.theRestSorted)
+                        .orElse(null);
             }
         }
     }

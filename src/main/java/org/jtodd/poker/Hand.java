@@ -51,4 +51,15 @@ public class Hand {
             c -> c.value
         ));
     }
+
+    public static Optional<Card> findFirstDifference(List<Card> sortedHand1, List<Card> sortedHand2) {
+        for (int i = 0; i < sortedHand1.size() && i < sortedHand2.size(); ++i) {
+            Card myCard = sortedHand1.get(i);
+            Card otherCard = sortedHand2.get(i);
+            if (myCard.numericValue != otherCard.numericValue) {
+                return Optional.of(myCard);
+            }
+        }
+        return Optional.empty();
+    }
 }

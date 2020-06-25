@@ -72,9 +72,9 @@ public abstract class Ranking implements Comparable<Ranking> {
 
     private static boolean isStraight(Hand hand) {
         List<Card> theSortedCards = hand.sortByValue();
-        int hightestCardValue = theSortedCards.get(0).numericValue;
+        int highestCardValue = theSortedCards.get(0).numericValue;
         return IntStream.range(0, theSortedCards.size()).allMatch(
-            i -> hightestCardValue - theSortedCards.get(i).numericValue == i
+            i -> highestCardValue - theSortedCards.get(i).numericValue == i
         );
     }
 

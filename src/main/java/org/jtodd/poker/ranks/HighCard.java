@@ -40,17 +40,10 @@ public class HighCard extends Ranking {
     public void setTiebreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             HighCard ohc = (HighCard) o;
-            for (int i = 0; i < this.sortedByValue.size() && i < ohc.sortedByValue.size(); ++i) {
-                Card myCard = this.sortedByValue.get(i);
-                Card otherCard = ohc.sortedByValue.get(i);
-                if (myCard.numericValue != otherCard.numericValue) {
-                    super.tieBreaker = myCard;
-                    return;
-                }
-            }
-            super.tieBreaker = this.sortedByValue.get(this.sortedByValue.size() - 1);
+            super.tieBreaker = Hand.findFirstDifference(this.sortedByValue, ohc.sortedByValue)
+                    .orElse(this.sortedByValue.get(0));
         } else {
-            super.tieBreaker = this.sortedByValue.get(this.sortedByValue.size() - 1);
+            super.tieBreaker = this.sortedByValue.get(0);
         }
     }
 
