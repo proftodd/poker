@@ -24,4 +24,9 @@ public class Straight extends Ranking {
             return Integer.compare(this.getValue(), o.getValue());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Straight";
+    }
 }

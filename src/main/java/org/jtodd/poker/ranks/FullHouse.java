@@ -33,4 +33,9 @@ public class FullHouse extends Ranking {
             return Integer.compare(this.getValue(), o.getValue());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Full House";
+    }
 }

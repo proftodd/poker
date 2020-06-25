@@ -24,4 +24,9 @@ public class StraightFlush extends Ranking {
             return -1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Straight Flush";
+    }
 }

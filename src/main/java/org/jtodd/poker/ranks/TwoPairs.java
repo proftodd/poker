@@ -57,4 +57,9 @@ public class TwoPairs extends Ranking {
             return Integer.compare(this.getValue(), o.getValue());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Two Pairs";
+    }
 }

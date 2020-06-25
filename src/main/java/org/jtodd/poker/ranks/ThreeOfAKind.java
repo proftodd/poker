@@ -33,4 +33,9 @@ public class ThreeOfAKind extends Ranking {
             return Integer.compare(this.getValue(), o.getValue());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Three of a Kind";
+    }
 }

@@ -33,4 +33,9 @@ public class HighCard extends Ranking {
             return 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "High Card";
+    }
 }
