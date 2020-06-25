@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Hand {
@@ -53,24 +54,17 @@ public class Hand {
     }
 
     public static Optional<Integer> findFirstDifference(List<Card> sortedHand1, List<Card> sortedHand2) {
-        for (int i = 0; i < sortedHand1.size() && i < sortedHand2.size(); ++i) {
-            Card myCard = sortedHand1.get(i);
-            Card otherCard = sortedHand2.get(i);
-            if (myCard.numericValue != otherCard.numericValue) {
-                return Optional.of(i);
-            }
-        }
-        return Optional.empty();
+        return IntStream.range(0, Math.min(sortedHand1.size(), sortedHand2.size()))
+                .filter(i -> sortedHand1.get(i).numericValue != sortedHand2.get(i).numericValue)
+                .boxed()
+                .findFirst();
     }
 
     public static int compareFirstDifference(List<Card> sortedHand1, List<Card> sortedHand2) {
-        Optional<Integer> firstDifference = Hand.findFirstDifference(sortedHand1, sortedHand2);
-        if (firstDifference.isPresent()) {
-            Card myCard = sortedHand1.get(firstDifference.get());
-            Card otherCard = sortedHand2.get(firstDifference.get());
+        return Hand.findFirstDifference(sortedHand1, sortedHand2).map(i -> {
+            Card myCard = sortedHand1.get(i);
+            Card otherCard = sortedHand2.get(i);
             return Integer.compare(otherCard.numericValue, myCard.numericValue);
-        } else {
-            return 0;
-        }
+        }).orElse(0);
     }
 }
