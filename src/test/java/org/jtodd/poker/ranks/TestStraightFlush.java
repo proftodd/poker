@@ -18,4 +18,10 @@ public class TestStraightFlush {
         Ranking r = new StraightFlush(Hand.parseHand("9H TH JH QH KH").get());
         Assert.assertEquals("Straight Flush: King to 9 of Hearts", r.toString());
     }
+
+    @Test
+    public void itGeneratesCorrectStringForLowAce() {
+        Ranking r = new Straight(Hand.parseHand("AH 2H 5H 3H 4H").get());
+        Assert.assertEquals("Straight: 5 to Ace", r.toString());
+    }
 }

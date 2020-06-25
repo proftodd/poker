@@ -19,7 +19,6 @@ public class TestRanking {
         Assert.assertTrue(Ranking.rank(theHand) instanceof StraightFlush);
     }
 
-    @Ignore("low aces not implemented yet")
     @Test
     public void acesCanBeLowForStraightFlush() {
          String handString = "AC 2C 3C 4C 5C";
@@ -55,7 +54,6 @@ public class TestRanking {
         Assert.assertTrue(Ranking.rank(theHand) instanceof Straight);
     }
 
-    @Ignore("low aces not implemented yet")
     @Test
     public void itAssignsStraightWithLowAce() {
         String handString = "AD 2C 3S 4H 5D";

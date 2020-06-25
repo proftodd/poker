@@ -5,10 +5,21 @@ import org.jtodd.poker.Hand;
 
 import java.util.List;
 
-public class StraightFlush extends Ranking {
+public class StraightFlush extends Straight {
+
+    private final Card high;
+    private final Card low;
 
     public StraightFlush(Hand hand) {
         super(hand);
+        List<Card> sorted = hand.sortByValue();
+        if (sorted.get(0).value == 'A' && sorted.get(1).value == '5') {
+            high = sorted.get(1);
+            low = sorted.get(0);
+        } else {
+            high = sorted.get(0);
+            low = sorted.get(sorted.size() - 1);
+        }
     }
 
     @Override
@@ -18,14 +29,11 @@ public class StraightFlush extends Ranking {
 
     @Override
     public void setTiebreaker(Ranking o) {
-        super.tieBreaker = this.getHand().sortByValue().get(0);
+        super.tieBreaker = this.high;
     }
 
     @Override
     public String toString() {
-        List<Card> sorted = this.getHand().sortByValue();
-        Card high = sorted.get(0);
-        Card low = sorted.get(sorted.size() - 1);
         return String.format("Straight Flush: %s to %s of %s", high.toString(), low.toString(), high.suitString());
     }
 }

@@ -18,4 +18,10 @@ public class TestStraight {
         Ranking r = new Straight(Hand.parseHand("9H TH JC QH KH").get());
         Assert.assertEquals("Straight: King to 9", r.toString());
     }
+
+    @Test
+    public void itGeneratesCorrectStringForLowAce() {
+        Ranking r = new Straight(Hand.parseHand("AH 2H 5C 3H 4H").get());
+        Assert.assertEquals("Straight: 5 to Ace", r.toString());
+    }
 }
