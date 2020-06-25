@@ -25,7 +25,16 @@ public abstract class Ranking implements Comparable<Ranking> {
         return Integer.compare(this.getValue(), o.getValue());
     }
 
-    public abstract int tieBreaker(Ranking o);
+    public int tieBreaker(Ranking o) {
+        if (this.getValue() == o.getValue()) {
+            return Hand.compareFirstDifference(
+                    this.getHand().sortByValue(),
+                    o.getHand().sortByValue()
+            );
+        } else {
+            return this.compareTo(o);
+        }
+    }
 
     public abstract void setTiebreaker(Ranking o);
 

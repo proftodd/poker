@@ -62,4 +62,15 @@ public class Hand {
         }
         return Optional.empty();
     }
+
+    public static int compareFirstDifference(List<Card> sortedHand1, List<Card> sortedHand2) {
+        Optional<Integer> firstDifference = Hand.findFirstDifference(sortedHand1, sortedHand2);
+        if (firstDifference.isPresent()) {
+            Card myCard = sortedHand1.get(firstDifference.get());
+            Card otherCard = sortedHand2.get(firstDifference.get());
+            return Integer.compare(otherCard.numericValue, myCard.numericValue);
+        } else {
+            return 0;
+        }
+    }
 }

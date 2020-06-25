@@ -20,23 +20,6 @@ public class HighCard extends Ranking {
     }
 
     @Override
-    public int tieBreaker(Ranking o) {
-        if (this.getValue() == o.getValue()) {
-            HighCard ohc = (HighCard) o;
-            for (int i = 0; i < this.sortedByValue.size() && i < ohc.sortedByValue.size(); ++i) {
-                Card myCard = this.sortedByValue.get(i);
-                Card otherCard = ohc.sortedByValue.get(i);
-                if (myCard.numericValue != otherCard.numericValue) {
-                    return Integer.compare(otherCard.numericValue, myCard.numericValue);
-                }
-            }
-            return 0;
-        } else {
-            return this.compareTo(o);
-        }
-    }
-
-    @Override
     public void setTiebreaker(Ranking o) {
         if (this.getValue() == o.getValue()) {
             HighCard ohc = (HighCard) o;

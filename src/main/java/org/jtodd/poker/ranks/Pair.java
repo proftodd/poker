@@ -35,14 +35,7 @@ public class Pair extends Ranking {
             if (this.thePair.numericValue != op.thePair.numericValue) {
                 return Integer.compare(op.thePair.numericValue, this.thePair.numericValue);
             } else {
-                for (int i = this.theRestSorted.size() - 1; i >= 0; --i) {
-                    Card myCard = this.theRestSorted.get(i);
-                    Card otherCard = op.theRestSorted.get(i);
-                    if (myCard.numericValue != otherCard.numericValue) {
-                        return Integer.compare(otherCard.numericValue, myCard.numericValue);
-                    }
-                }
-                return 0;
+                return Hand.compareFirstDifference(this.theRestSorted, op.theRestSorted);
             }
         } else {
             return this.compareTo(o);
