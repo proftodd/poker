@@ -14,12 +14,11 @@ public class TestGame {
         Assert.assertEquals("White wins. - with High Card: Ace", theGame.toString());
     }
 
-    @Ignore("clarify with PO that full house beats flush")
     @Test
     public void itGeneratesCorrectResult02() {
         String gameString = "Black: 2H 4S 4C 2D 4H  White: 2S 8S AS QS 3S";
         Game theGame = Game.fromString(gameString);
-        Assert.assertEquals("White wins. - with Flush", theGame.toString());
+        Assert.assertEquals("Black wins. - with Full House", theGame.toString());
     }
 
     @Ignore("implement reporting on high card tiebreaker")
