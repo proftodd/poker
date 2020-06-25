@@ -12,6 +12,7 @@ public class StraightFlush extends Straight {
     public int getValue() {
         return 0;
     }
+
     @Override
     public String toString() {
         return String.format("Straight Flush: %s to %s of %s", super.high.toString(), super.low.toString(), high.suitString());

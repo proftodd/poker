@@ -20,7 +20,7 @@ public class Pair extends Ranking {
                 theRestSorted.add(bucket.get(0));
             }
         }
-        Collections.sort(theRestSorted, (c1, c2) -> Integer.compare(c2.numericValue, c1.numericValue));
+        theRestSorted.sort((c1, c2) -> Integer.compare(c2.numericValue, c1.numericValue));
     }
 
     @Override

@@ -28,8 +28,6 @@ public class Flush extends Ranking {
 
     @Override
     public String toString() {
-        List<Card> meSortedByValue = this.getHand().sortByValue();
-        Card high = meSortedByValue.get(0);
         return String.format("Flush: %s", this.getHand().theCards().iterator().next().suitString());
     }
 }
