@@ -32,3 +32,9 @@ application {
     // Define the main class for the application.
     mainClassName = 'org.jtodd.poker.App'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.jtodd.poker.App'
+    }
+}
